@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types';
-import { Recipe } from './Recipe';
+import { Recipe } from '../Recipe/Recipe';
+import { List } from './RecipeList.styled';
 
 export const RecipeList = ({ recipes }) => {
   return (
-    <div style={{ display: 'flex', gap: 16 }}>
+    <List>
       {recipes.map(recipe => (
-        <Recipe key={recipe.id} recipe={recipe} />
+        <li key={recipe.id}>
+          <Recipe recipe={recipe} />
+        </li>
       ))}
-    </div>
+    </List>
   );
 };
 
