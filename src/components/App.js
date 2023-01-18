@@ -1,15 +1,9 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { Layout } from './Layout';
-import { StickerForm } from './StickerForm';
-import { StickerList } from './StickerList';
+import { StickerForm } from './StickerForm/StickerForm';
+import { StickerList } from './StickerList/StickerList';
 import initialStickers from '../stickers.json';
-
-/**
- * 1. Можно добавлять новые стикеры через форму.
- * 2. Может быть открыт только один стикер, остальные закрыты.
- *    То есть при открытии нового, закрывается тот, что был открыт.
- */
 
 export class App extends Component {
   state = {
@@ -18,14 +12,7 @@ export class App extends Component {
 
   addSticker = (img, label) => {
     this.setState(prevState => ({
-      stickers: [
-        ...prevState.stickers,
-        {
-          id: nanoid(),
-          img,
-          label,
-        },
-      ],
+      stickers: [...prevState.stickers, { id: nanoid(), img, label }],
     }));
   };
 

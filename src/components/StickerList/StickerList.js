@@ -1,4 +1,4 @@
-import { Sticker } from 'components/Sticker';
+import { Sticker } from 'components/Sticker/Sticker';
 import { Component } from 'react';
 import { List } from './StickerList.styled';
 
