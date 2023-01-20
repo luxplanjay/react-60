@@ -1,51 +1,41 @@
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
+import { BreedSelect } from './BreedSelect';
 import { Layout } from './Layout';
-import { StickerForm } from './StickerForm/StickerForm';
-import { StickerList } from './StickerList/StickerList';
-import initialStickers from '../stickers.json';
+import { fetchDogByBreed } from '../api';
+import { Dog } from './Dog';
+import { DogSkeleton } from './DogSkeleton';
+import { ErrorMessage } from './ErrorMessage';
 
 export class App extends Component {
   state = {
-    stickers: [],
+    dog: null,
+    isLoading: false,
+    error: null,
   };
 
-  addSticker = (img, label) => {
-    this.setState(prevState => ({
-      stickers: [...prevState.stickers, { id: nanoid(), img, label }],
-    }));
-  };
-
-  deleteSticker = stickerId => {
-    this.setState(prevState => ({
-      stickers: prevState.stickers.filter(sticker => sticker.id !== stickerId),
-    }));
-  };
-
-  componentDidMount() {
-    const savedStickers = localStorage.getItem('stickers');
-    if (savedStickers !== null) {
-      const parsedStickers = JSON.parse(savedStickers);
-      this.setState({ stickers: parsedStickers });
-    } else {
-      this.setState({ stickers: initialStickers });
+  fetchDog = async breedId => {
+    try {
+      this.setState({ isLoading: true, error: null });
+      const dog = await fetchDogByBreed(breedId);
+      this.setState({ dog });
+    } catch (error) {
+      this.setState({
+        error:
+          'У нас не получилось взять данные о собачке, попробуйте еще разочек 😇',
+      });
+    } finally {
+      this.setState({ isLoading: false });
     }
-  }
-
-  componentDidUpdate(_, prevState) {
-    if (prevState.stickers !== this.state.stickers) {
-      localStorage.setItem('stickers', JSON.stringify(this.state.stickers));
-    }
-  }
+  };
 
   render() {
+    const { dog, isLoading, error } = this.state;
     return (
       <Layout>
-        <StickerForm onSubmit={this.addSticker} />
-        <StickerList
-          items={this.state.stickers}
-          onDelete={this.deleteSticker}
-        />
+        <BreedSelect onSelect={this.fetchDog} />
+        {isLoading && <DogSkeleton />}
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+        {dog && !isLoading && <Dog dog={dog} />}
       </Layout>
     );
   }
