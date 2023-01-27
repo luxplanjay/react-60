@@ -1,9 +1,9 @@
 import { useState, memo } from 'react';
 
-const ChildComponent = () => {
+const ChildComponent = memo(() => {
   console.log('Child re-render');
   return <div>ChildComponent</div>;
-};
+});
 
 export const MemoExample = () => {
   const [value, setValue] = useState(0);

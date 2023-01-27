@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 import { memo, useState } from 'react';
 
-const ChildComponent = ({ doStuff }) => {
+const ChildComponent = memo(({ doStuff }) => {
   console.log(`ChildComponent re-render ${Date.now()}`);
   return <>ChildComponent</>;
-};
+});
 
 export const CallbackExample = () => {
   const [value, setValue] = useState(0);
@@ -12,9 +12,9 @@ export const CallbackExample = () => {
 
   console.log(`ParentComponent  re-render ${Date.now()}`);
 
-  const doStuff = () => {
-    console.log('Doing stuff');
-  };
+  const doStuff = useCallback(() => {
+    console.log('Doing stuff' + value);
+  }, [value]);
 
   return (
     <>

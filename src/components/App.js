@@ -2,7 +2,7 @@ import { Layout } from './Layout';
 // import { UseMemoExample } from './UseMemoExample';
 // import { RefExample } from './RefExample';
 // import { MemoExample } from './MemoExample';
-// import { CallbackExample } from './CallbackExample';
+import { CallbackExample } from './UseCallbackExample';
 
 export const App = () => {
   return (
@@ -10,7 +10,7 @@ export const App = () => {
       {/* <UseMemoExample /> */}
       {/* <RefExample /> */}
       {/* <MemoExample /> */}
-      {/* <CallbackExample /> */}
+      <CallbackExample />
     </Layout>
   );
 };
