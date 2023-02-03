@@ -1,16 +1,15 @@
+import { Route, Routes } from 'react-router-dom';
 import { Layout } from './Layout';
-// import { UseMemoExample } from './UseMemoExample';
-// import { RefExample } from './RefExample';
-// import { MemoExample } from './MemoExample';
-import { CallbackExample } from './UseCallbackExample';
+import { Home } from 'pages/Home';
+import { Other } from 'pages/Other';
 
 export const App = () => {
   return (
-    <Layout>
-      {/* <UseMemoExample /> */}
-      {/* <RefExample /> */}
-      {/* <MemoExample /> */}
-      <CallbackExample />
-    </Layout>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="other" element={<Other />} />
+      </Route>
+    </Routes>
   );
 };
