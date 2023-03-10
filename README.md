@@ -37,6 +37,7 @@
 
 - https://www.youtube.com/playlist?list=PLNkWIWHIRwMFSLI9wBuHxuGI5lAZ7QNUg
 - https://dou.ua/lenta/articles/interview-questions-javascript-developer/?from=jobsrelated
+- https://github.com/sudheerj/reactjs-interview-questions
 
 ### SOLID (JS собес)
 
